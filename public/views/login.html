@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <title>Reservation System | Login</title>
+</head>
+<body>
+    <main class="login">
+        <form action="/login" class="form" method="POST">
+            <h2 class="form-title">sign in</h2>
+            <div class="form-group">
+                <input type="text" name="uid" id="uid" class="form-input" required placeholder="ID">
+                <label for="uid" class="form-label">ID</label>
+            </div>
+            <div class="form-group">
+                <input type="password" name="upass" id="upass" class="form-input" required placeholder="Password">
+                <label for="upass" class="form-label">Password</label>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="button" id="loginsubmit">Sign in</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

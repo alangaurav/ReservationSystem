@@ -1,0 +1,20 @@
+.footer {
+    text-align: center;
+    background-color: $color-text-dark;
+    color: $color-text-light;
+    padding: 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    &-text-large {
+        font-size: 1.3rem;
+        padding: .5rem 0;
+    }
+
+    &-text-small {
+        font-size: 1rem;
+        padding: .5rem 0;
+    }
+}
