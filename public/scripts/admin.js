@@ -34,6 +34,7 @@ function renderDeviceTable(data) {
             '<td class="table-body-element">' + element.did + '</td>' +
             '<td class="table-body-element">' + element.name + '</td>' +
             '<td class="table-body-element">' + element.pcip + '</td>' +
+            '<td class="table-body-element">' + element.currentUser + '</td>' +
             '<td class="table-body-element"> <button class="button button-delete" id="' + element.did + '">delete</button></td>' +
             '</tr>'
         )
