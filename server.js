@@ -33,7 +33,6 @@ app.use(session({
   }
 }));
 
-
 app.get('/', function (req, res) {
   if (req.session.user == "admin")
     res.redirect('/dashboard-admin');
@@ -76,7 +75,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     })
 
     app.get('/dashboard', function (req, res) {
-      if (req.session.authenticated) {
+      if (req.session.authenticated && req.session.user != 'admin') {
         res.sendFile(path.normalize(__dirname + '/public/views/dashboard.html'));
       }
       else
@@ -221,7 +220,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           { 'did': req.body.deviceId },
           {
             '$set':
-              { 'inUse': false }
+              { 'inUse': false, 'currentUser': null }
           },
         )
           .then(results => {
@@ -259,7 +258,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
     app.delete('/delete-pc', function (req, res) {
       if (req.session.user == 'admin') {
-        pcsCollection.deleteOne({ ip: req.body.ip })
+        pcsCollection.deleteOne({ ip: req.body.pcip })
           .then(results => {
             res.sendStatus(200);
           })
