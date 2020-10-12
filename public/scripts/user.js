@@ -8,17 +8,18 @@ $(document).ready(function () {
         dataType: "json",
         success: function (result) {
             user = result.user;
+
+            $.ajax({
+                type: "GET",
+                url: '/device-data',
+                dataType: "json",
+                success: function (result) {
+                    renderTable(result);
+                }
+            });
         }
     });
 
-    $.ajax({
-        type: "GET",
-        url: '/device-data',
-        dataType: "json",
-        success: function (result) {
-            renderTable(result);
-        }
-    });
 });
 
 function renderTable(data) {
