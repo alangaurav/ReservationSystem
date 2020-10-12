@@ -70,7 +70,7 @@ $('#reserve').click(function () {
 })
 
 $('table').on('click', '.button-delete', function () {
-    var deviceId = $('.button-delete').attr('id');
+    var deviceId = $(this).attr('id');
     var obj = { 'deviceId': deviceId };
     $.ajax({
         type: "POST",

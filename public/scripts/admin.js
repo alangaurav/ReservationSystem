@@ -67,9 +67,7 @@ function renderPCTable(data) {
 }
 
 $('.table-body__device').on('click', '.button-delete', function () {
-    console.log('Delete called');
-
-    var deviceId = $('.button-delete').attr('id');
+    var deviceId = $(this).attr('id');
     var obj = { 'deviceId': deviceId};
     $.ajax({
         type: "DELETE",
@@ -84,7 +82,7 @@ $('.table-body__device').on('click', '.button-delete', function () {
 })
 
 $('.table-body__user').on('click', '.button-delete', function () {
-    var uid = $('.button-delete').attr('id');
+    var uid = $(this).attr('id');
     var obj = { 'uid': uid};
     $.ajax({
         type: "DELETE",
@@ -99,7 +97,7 @@ $('.table-body__user').on('click', '.button-delete', function () {
 })
 
 $('.table-body__pc').on('click', '.button-delete', function () {
-    var pcip = $('.button-delete').attr('id');
+    var pcip = $(this).attr('id');
     var obj = { 'pcip': pcip};
     $.ajax({
         type: "DELETE",
