@@ -1,11 +1,13 @@
 .table-container {
     padding: 2rem;
     margin: 2rem 0;
+    width: 75vw;
+    margin: 0 auto;
 }
 
 .table {
     background-color: $color-white;
-    width: 75vw;
+    width: 100%;
     border-collapse: collapse;
     margin: 0 auto;
 

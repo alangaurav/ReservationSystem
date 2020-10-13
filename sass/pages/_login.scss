@@ -1,15 +1,43 @@
 .login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $color-background;
+    background-color: $color-dark-2;
     height: 100%;
     width: 100%;
 
-    & .form {
-        box-shadow: 0 .5rem 1rem rgba($color: #000000, $alpha: .3);
+    position: relative;
+
+    .main-title {
+        padding-left: 15rem;
+
+        &-container {
+            background-color: $color-black;
+            color: $color-white;
+            clip-path: polygon(0 0, 65vw 0, 45vw 100%, 0 100%);
+            width: 100vw;
+            height: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        span {
+            font-size: 8rem;
+            text-align: left;
+            font-weight: 400;
+            display: block;
+            animation: slideIn 1s ease-in;
+        }
+    }
+
+    .form {
+        &-container {
+            position: absolute;
+            right: 15rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
         background-color: $color-white;
-        border-radius: 1rem;
-        padding: 1rem;
+        box-shadow: 0 1rem .5rem rgba($color: #000000, $alpha: .15);
+        animation: fadeIn 1s ease-in;
     }
 }
