@@ -99,7 +99,11 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
     app.get('/current-user', function (req, res) {
       if (req.session.authenticated) {
-        res.json({ user: req.session.user });
+        usersCollection.findOne({ 'uid': req.session.user }, { projection: { _id: 0, password: 0 } })
+          .then(results => {
+            res.json(results);
+          })
+          .catch(error => console.error(error));
       }
       else
         res.redirect('/');
@@ -108,7 +112,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     app.get('/user-data', function (req, res) {
       if (req.session.user == 'admin') {
         var userData = [];
-        var cursor = usersCollection.find({ name: { $ne: 'admin' } }, { _id: 0, _password: 0 });
+        var cursor = usersCollection.find({ name: { $ne: 'admin' } }, { projection: { _id: 0, _password: 0 } });
         cursor.forEach(function (doc, err) {
           userData.push(doc);
         }, function () {
@@ -120,10 +124,10 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     })
 
     app.get('/pc-data', function (req, res) {
-      if (req.session.user == 'admin') {
+      if (req.session.authenticated) {
         var pcData = [];
 
-        var cursor = pcsCollection.find({}, { _id: 0 });
+        var cursor = pcsCollection.find({}, { projection: { _id: 0 } });
         cursor.forEach(function (doc, err) {
           pcData.push(doc);
         }, function () {
@@ -160,6 +164,24 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         res.redirect('/');
     })
 
+    app.post('/update-device', function (req, res) {
+      if (req.session.user == "admin") {
+        devicesCollection.findOneAndUpdate(
+          { 'did': req.body.id },
+          {
+            '$set':
+              { 'did': req.body.id, 'name': req.body.name, 'pcip': req.body.ip }
+          },
+          { upsert: false })
+          .then(results => {
+            res.redirect('/dashboard-admin');
+          })
+          .catch(error => console.error(error))
+      }
+      else
+        res.redirect('/');
+    })
+
     app.post('/add-pc', function (req, res) {
       if (req.session.user == "admin") {
         pcsCollection.findOneAndUpdate(
@@ -169,6 +191,24 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
               { 'name': req.body.PCName, 'ip': req.body.pcip }
           },
           { upsert: true })
+          .then(results => {
+            res.redirect('/dashboard-admin');
+          })
+          .catch(error => console.error(error))
+      }
+      else
+        res.redirect('/');
+    })
+
+    app.post('/update-pc', function (req, res) {
+      if (req.session.user == "admin") {
+        pcsCollection.findOneAndUpdate(
+          { 'ip': req.body.ip },
+          {
+            '$set':
+              { 'name': req.body.name, 'ip': req.body.ip }
+          },
+          { upsert: false })
           .then(results => {
             res.redirect('/dashboard-admin');
           })
@@ -189,6 +229,24 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           { upsert: true })
           .then(results => {
             res.redirect('/dashboard-admin');
+          })
+          .catch(error => console.error(error))
+      }
+      else
+        res.redirect('/');
+    })
+
+    app.post('/update-user', function (req, res) {
+      if (req.session.authenticated) {
+        usersCollection.findOneAndUpdate(
+          { 'uid': req.body.uid },
+          {
+            '$set':
+              { 'uid': req.body.uid, 'name': req.body.uname, 'uip': req.body.uIP }
+          },
+          { upsert: false })
+          .then(results => {
+            res.redirect('/dashboard');
           })
           .catch(error => console.error(error))
       }
@@ -218,6 +276,42 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
       if (req.session.authenticated) {
         devicesCollection.findOneAndUpdate(
           { 'did': req.body.deviceId },
+          {
+            '$set':
+              { 'inUse': false, 'currentUser': null }
+          },
+        )
+          .then(results => {
+            res.sendStatus(200);
+          })
+          .catch(error => console.error(error))
+      }
+      else
+        res.redirect('/');
+    })
+
+    app.post('/reserve-pc', function (req, res) {
+      if (req.session.authenticated) {
+        pcsCollection.findOneAndUpdate(
+          { 'ip': req.body.pcip },
+          {
+            '$set':
+              { 'inUse': true, 'currentUser': req.session.user }
+          },
+        )
+          .then(results => {
+            res.sendStatus(200);
+          })
+          .catch(error => console.error(error))
+      }
+      else
+        res.redirect('/');
+    })
+
+    app.post('/remove-pc', function (req, res) {
+      if (req.session.authenticated) {
+        pcsCollection.findOneAndUpdate(
+          { 'ip': req.body.pcip },
           {
             '$set':
               { 'inUse': false, 'currentUser': null }
