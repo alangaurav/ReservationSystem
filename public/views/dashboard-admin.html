@@ -10,125 +10,132 @@
 </head>
 
 <body>
-    <header>
-        <div class="nav">
-            <div class="nav-logo">
-                Reservation System
-            </div>
-            <div class="nav-links">
-                <ul class="nav-list">
-                    <li class="nav-list-item" id="logout">Logout</li>
-                </ul>
+    <main>
+        <div class="header">
+            <div class="title">
+                <span class="title-text">Hello, </span>
+                <span class="title-user"></span>
             </div>
         </div>
-    </header>
-    <main>
-        <section>
-            <form action="/add-device" class="form form-horizontal" method="POST">
-                <h2 class="form-title form-title__small">Register Device</h2>
-                <div class="form-group">
-                    <input type="text" name="deviceName" id="deviceName" class="form-input" required placeholder="Name">
-                    <label for="deviceName" class="form-label">Device Name</label>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="deviceId" id="deviceId" class="form-input" required placeholder="ID">
-                    <label for="deviceId" class="form-label">Device ID</label>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="devicePC" id="devicePC" class="form-input" required placeholder="PC">
-                    <label for="devicePC" class="form-label">Device PC</label>
-                </div>
-                <div class="form-button text-center">
-                    <button type="submit" class="button">Add device</button>
-                </div>
-            </form>
 
-            <div class="table-container">
-                <h2 class="table-title">Device List</h2>
-                <table class="table">
-                    <thead class="table-head">
+        <div class="main-container">
+            <nav class="sidenav">
+                <ul class="sidenav-list">
+                    <li class="sidenav-list-item sidenav-list-item__active" value="devices">Devices</li>
+                    <li class="sidenav-list-item" value="pcs">PCs</li>
+                    <li class="sidenav-list-item" value="users">Users</li>
+                    <li class="sidenav-list-item" value="register">Register</li>
+                    <li class="sidenav-list-item" id="signout">Sign out</li>
+                </ul>
+            </nav>
+
+            <section class="content-container active" id="devices">
+                <div class="table-container">
+                    <table class="table">
+                        <thead class="table-head">
+                            <thead class="table-head">
+                                <tr class="table-head-row">
+                                    <th class="table-head-element">ID</th>
+                                    <th class="table-head-element">Name</th>
+                                    <th class="table-head-element">IP</th>
+                                    <th class="table-head-element">Current User</th>
+                                    <th class="table-head-element"></th>
+                                </tr>
+                            </thead>
+                        </thead>
+                        <tbody class="table-body table-body__device">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="content-container inactive" id="pcs">
+                <div class="table-container">
+                    <table class="table">
                         <thead class="table-head">
                             <tr class="table-head-row">
-                                <th class="table-head-element">ID</th>
                                 <th class="table-head-element">Name</th>
                                 <th class="table-head-element">IP</th>
                                 <th class="table-head-element">Current User</th>
                                 <th class="table-head-element"></th>
                             </tr>
                         </thead>
-                    </thead>
-                    <tbody class="table-body table-body__device">
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        <section>
-            <form action="/add-PC" class="form form-horizontal" method="POST">
-                <h2 class="form-title form-title__small">Register PC</h2>
-                <div class="form-group">
-                    <input type="text" name="PCName" id="PCName" class="form-input" required placeholder="Name">
-                    <label for="PCName" class="form-label">PC Name</label>
+                        <tbody class="table-body table-body__pc">
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-group">
-                    <input type="text" name="pcip" id="pcip" class="form-input" required placeholder="IP">
-                    <label for="pcip" class="form-label">PC IP</label>
+            </section>
+            <section class="content-container inactive" id="users">
+                <div class="table-container">
+                    <table class="table">
+                        <thead class="table-head">
+                            <tr class="table-head-row">
+                                <th class="table-head-element">ID</th>
+                                <th class="table-head-element">Name</th>
+                                <th class="table-head-element">IP</th>
+                                <th class="table-head-element"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-body table-body__user">
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-button text-center">
-                    <button type="submit" class="button">Add PC</button>
-                </div>
-            </form>
+            </section>
+            <section class="content-container inactive" id="register">
+                <form action="/add-device" class="form form-horizontal" method="POST">
+                    <h2 class="form-title form-title__small">Register Device</h2>
+                    <div class="form-group">
+                        <input type="text" name="deviceName" id="deviceName" class="form-input" required
+                            placeholder="Name">
+                        <label for="deviceName" class="form-label">Device Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="deviceId" id="deviceId" class="form-input" required placeholder="ID">
+                        <label for="deviceId" class="form-label">Device ID</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="devicePC" id="devicePC" class="form-input" required placeholder="PC">
+                        <label for="devicePC" class="form-label">Device PC</label>
+                    </div>
+                    <div class="form-button text-center">
+                        <button type="submit" class="button">Add device</button>
+                    </div>
+                </form>
 
-            <div class="table-container">
-                <h2 class="table-title">PC List</h2>
-                <table class="table">
-                    <thead class="table-head">
-                        <tr class="table-head-row">
-                            <th class="table-head-element">Name</th>
-                            <th class="table-head-element">IP</th>
-                            <th class="table-head-element"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-body table-body__pc">
-                    </tbody>
-                </table>
-            </div>
-        </section>
-        <section>
-            <form action="/add-user" class="form form-horizontal" method="POST">
-                <h2 class="form-title form-title__small">Register User</h2>
-                <div class="form-group">
-                    <input type="text" name="uname" id="uname" class="form-input" required placeholder="Name">
-                    <label for="uname" class="form-label">Name</label>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="uid" id="uid" class="form-input" required placeholder="ID">
-                    <label for="uid" class="form-label">ID</label>
-                </div>
-                <div class="form-group">
-                    <input type="text" name="uIP" id="uIP" class="form-input" required placeholder="IP">
-                    <label for="uIP" class="form-label">IP</label>
-                </div>
-                <div class="form-button text-center">
-                    <button type="submit" class="button">Add User</button>
-                </div>
-            </form>
+                <form action="/add-PC" class="form form-horizontal" method="POST">
+                    <h2 class="form-title form-title__small">Register PC</h2>
+                    <div class="form-group">
+                        <input type="text" name="PCName" id="PCName" class="form-input" required placeholder="Name">
+                        <label for="PCName" class="form-label">PC Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="pcip" id="pcip" class="form-input" required placeholder="IP">
+                        <label for="pcip" class="form-label">PC IP</label>
+                    </div>
+                    <div class="form-button text-center">
+                        <button type="submit" class="button">Add PC</button>
+                    </div>
+                </form>
 
-            <div class="table-container">
-                <h2 class="table-title">User List</h2>
-                <table class="table">
-                    <thead class="table-head">
-                        <tr class="table-head-row">
-                            <th class="table-head-element">ID</th>
-                            <th class="table-head-element">Name</th>
-                            <th class="table-head-element">IP</th>
-                            <th class="table-head-element"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-body table-body__user">
-                    </tbody>
-                </table>
-            </div>
-        </section>
+                <form action="/add-user" class="form form-horizontal" method="POST">
+                    <h2 class="form-title form-title__small">Register User</h2>
+                    <div class="form-group">
+                        <input type="text" name="uname" id="uname" class="form-input" required placeholder="Name">
+                        <label for="uname" class="form-label">Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="uid" id="uid" class="form-input" required placeholder="ID">
+                        <label for="uid" class="form-label">ID</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="uIP" id="uIP" class="form-input" required placeholder="IP">
+                        <label for="uIP" class="form-label">IP</label>
+                    </div>
+                    <div class="form-button text-center">
+                        <button type="submit" class="button">Add User</button>
+                    </div>
+                </form>
+            </section>
+        </div>
     </main>
     <footer class="footer">
         <div class="footer-text-large">Built by Alan Gaurav</div>
@@ -136,6 +143,30 @@
             belong soley to Alan Gaurav. Embrace feminism and equality or suffer the misdeed of mankind.</div>
     </footer>
 
+    <div class="popup" id="popup">
+        <div class="popup__content">
+            <a href="/" class="popup__close">&times;</a>
+            <form class="form" method="POST">
+                <h2 class="form-title form-title__small">Update Information</h2>
+                <div class="form-group inactive">
+                    <input type="text" name="id" id="id" class="form-input form-input__id" placeholder="ID">
+                    <label for="ip" class="form-label">ID</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="name" id="name" class="form-input form-input__name" required
+                        placeholder="Name">
+                    <label for="name" class="form-label">Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="ip" id="ip" class="form-input form-input__ip" required placeholder="IP">
+                    <label for="ip" class="form-label">IP</label>
+                </div>
+                <div class="form-button text-center">
+                    <button type="submit" class="button">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../scripts/admin.js"></script>
 </body>
