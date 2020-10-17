@@ -1,0 +1,25 @@
+.sidenav {
+    flex: 1 1 20vw;
+    padding: 5rem 5rem;
+    &-list {
+        color: $color-dark-2;
+        font-size: 2rem;
+        list-style-type: none;
+
+        &-item {
+            padding: 1rem .5rem;
+            text-transform: uppercase;
+            transition: all .1s ease;
+  
+            &:hover {
+                padding-left: 1rem;
+                border-left: .25rem solid $color-primary;
+            }
+
+            &__active {
+                padding-left: 1.5rem;
+                border-left: .25rem solid $color-black;
+            }
+        }
+    }
+}
