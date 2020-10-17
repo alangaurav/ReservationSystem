@@ -1,41 +1,8 @@
-.nav {
-    width: 100%;
-    display: flex;
-    align-items: baseline;
-    background-color: $color-primary;
-    color: $color-text-light;
-    padding: 1.5rem 2.5rem;
-    margin-bottom: 3rem;
-    justify-content: space-between;
-    box-shadow: 0 .1rem .5rem rgba($color: #000000, $alpha: .15);
+.header {
+    padding: 10rem 5rem;
+}
 
-    &-links {
-        font-size: 1.8rem;
-        justify-self: flex-end;
-    }
-
-    &-logo {
-        font-size: 2.4rem;
-        justify-self: flex-start;
-        font-weight: 500;
-    }
-
-    &-list {
-        list-style-type: none;
-        display: flex;
-        font-size: inherit;
-        color: inherit;
-
-        &-item {
-            padding: 0 1rem;
-            transition: all .3s ease;
-            display: block;
-            background-clip: padding-box;
-            cursor: pointer;
-
-            &:hover {
-                color: $color-text-dark;
-            }
-        }
-    }
+.title {
+    color: $color-primary;
+    font-size: 5rem;
 }

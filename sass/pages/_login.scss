@@ -11,7 +11,7 @@
         &-container {
             background-color: $color-black;
             color: $color-white;
-            clip-path: polygon(0 0, 65vw 0, 45vw 100%, 0 100%);
+            clip-path: polygon(0 0, 60vw 0, 40vw 100%, 0 100%);
             width: 100vw;
             height: 100%;
             display: flex;
@@ -20,7 +20,7 @@
         }
 
         span {
-            font-size: 8rem;
+            font-size: 7rem;
             text-align: left;
             font-weight: 400;
             display: block;

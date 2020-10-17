@@ -1,0 +1,13 @@
+.main-container {
+    display: flex;
+    padding-bottom: 8rem;
+    height: 65vh;
+}
+
+.content-container {
+    flex: 4 4 80vw;
+    padding: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: center;
+}

@@ -7,6 +7,7 @@
     transition: translate .2s ease;
     box-shadow: 0 .2rem 1rem rgba($color: #000000, $alpha: .2);
     color: $color-text-dark;
+    background-color: $color-white;
 
     &:hover,
     &:visited {
@@ -16,5 +17,17 @@
     &:focus,
     &:active {
         transform: translateY(.4rem);
+    }
+
+    &-delete {
+        color: $color-white;
+        background-color: $color-red;
+        border: .1rem solid $color-white;
+    }
+
+    &-reserve {
+        color: $color-black;
+        background-color: $color-green;
+        border: .1rem solid $color-black;
     }
 }

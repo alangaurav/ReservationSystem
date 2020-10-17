@@ -18,3 +18,18 @@ body {
     box-shadow: 0 .1rem .5rem rgba($color: #000000, $alpha: 0.15);
     position: relative;
 }
+
+a {
+    color: inherit;
+    text-decoration: none;
+
+    &:link,
+    &:visited {
+        color: inherit;
+    }
+
+    &:hover,
+    &:active {
+        color: inherit;
+    }
+}
