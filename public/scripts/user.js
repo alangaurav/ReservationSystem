@@ -9,18 +9,9 @@ $(document).ready(function () {
         success: function (result) {
             user = result.uid;
             $('.title-user').append(result.name + '.');
-
-            $.ajax({
-                type: "GET",
-                url: '/device-data',
-                dataType: "json",
-                success: function (result) {
-                    renderDeviceTable(result);
-                }
-            });
+            renderDeviceTable();
         }
     });
-
 });
 
 function renderDeviceTable() {
@@ -126,10 +117,17 @@ function renderUserInfo() {
 
 $('.sidenav-list').on('click', '.sidenav-list-item', function () {
     var clickedItem = $(this).attr('value');
-    if (clickedItem == 'devices')
+    var deviceTableInterval, pcTableInterval;
+    if (clickedItem == 'devices') {
         renderDeviceTable();
-    else if (clickedItem == 'pcs')
+        deviceTableInterval = setInterval(renderDeviceTable, 150000);
+        clearInterval(pcTableInterval);
+    }
+    else if (clickedItem == 'pcs') {
         renderPCTable();
+        pcTableInterval = setInterval(renderPCTable, 150000);
+        clearInterval(deviceTableInterval);
+    }
     else if (clickedItem == 'user-info')
         renderUserInfo();
 
@@ -161,8 +159,13 @@ $('#table-device .table-body').on('click', '.button-reserve', function () {
         dataType: "text",
         success: function () {
             alert("You have successfully reserved the device" + deviceId + "!");
-            renderDeviceTable();
         },
+        error: function () {
+            alert("This device has already been reserved by someone else!");
+        },
+        complete: function () {
+            renderDeviceTable();
+        }
     })
 })
 
@@ -191,8 +194,13 @@ $('#table-pc .table-body').on('click', '.button-reserve', function () {
         dataType: "text",
         success: function () {
             alert("You have successfully reserved the pc " + pcip + "!");
-            renderPCTable();
         },
+        error: function () {
+            alert("This PC has already been reserved by someone else!");
+        },
+        complete: function () {
+            renderPCTable();
+        }
     })
 })
 

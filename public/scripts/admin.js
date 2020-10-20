@@ -106,10 +106,17 @@ function renderPCTable() {
 
 $('.sidenav-list').on('click', '.sidenav-list-item', function () {
     var clickedItem = $(this).attr('value');
-    if (clickedItem == 'devices')
+    var deviceTableInterval, pcTableInterval;
+    if (clickedItem == 'devices') {
         renderDeviceTable();
-    else if (clickedItem == 'pcs')
+        deviceTableInterval = setInterval(renderDeviceTable, 150000);
+        clearInterval(pcTableInterval);
+    }
+    else if (clickedItem == 'pcs') {
         renderPCTable();
+        pcTableInterval = setInterval(renderPCTable, 150000);
+        clearInterval(deviceTableInterval);
+    }
     else if (clickedItem == 'users')
         renderUserTable();
 
