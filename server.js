@@ -56,8 +56,9 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
       usersCollection.findOne({ 'uid': userid })
         .then(results => {
-
-          if (pass == results.password) {
+          if(!results)
+            res.redirect('/');
+          else if (pass == results.password) {
             req.session.user = userid;
             req.session.authenticated = true;
 
