@@ -56,7 +56,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
       usersCollection.findOne({ 'uid': userid })
         .then(results => {
-          if(!results)
+          if (!results)
             res.redirect('/');
           else if (pass == results.password) {
             req.session.user = userid;
@@ -87,7 +87,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
       if (req.session.authenticated) {
         var deviceData = [];
 
-        var cursor = devicesCollection.find({}, { _id: 0 });
+        var cursor = devicesCollection.find({}, { _id: 0 }).sort({ name: 1 });
         cursor.forEach(function (doc, err) {
           deviceData.push(doc);
         }, function () {
@@ -113,7 +113,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
     app.get('/user-data', function (req, res) {
       if (req.session.user == 'admin') {
         var userData = [];
-        var cursor = usersCollection.find({ name: { $ne: 'admin' } }, { projection: { _id: 0, _password: 0 } });
+        var cursor = usersCollection.find({ name: { $ne: 'admin' } }, { projection: { _id: 0, _password: 0 } }).sort({ name: 1 });
         cursor.forEach(function (doc, err) {
           userData.push(doc);
         }, function () {
@@ -128,7 +128,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
       if (req.session.authenticated) {
         var pcData = [];
 
-        var cursor = pcsCollection.find({}, { projection: { _id: 0 } });
+        var cursor = pcsCollection.find({}, { projection: { _id: 0 } }).sort({ name: 1 });
         cursor.forEach(function (doc, err) {
           pcData.push(doc);
         }, function () {
@@ -153,7 +153,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           { 'did': req.body.deviceId },
           {
             '$setOnInsert':
-              { 'did': req.body.deviceId, 'name': req.body.deviceName, 'pcip': req.body.devicePC, 'inUse': false, 'currentUser': null }
+              { 'did': req.body.deviceId, 'name': req.body.deviceName, 'inUse': false, 'currentUser': null, 'location.name': null, 'location.ip': null, 'location.loc': null }
           },
           { upsert: true })
           .then(results => {
@@ -167,17 +167,56 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
 
     app.post('/update-device', function (req, res) {
       if (req.session.user == "admin") {
-        devicesCollection.findOneAndUpdate(
-          { 'did': req.body.id },
-          {
-            '$set':
-              { 'did': req.body.id, 'name': req.body.name, 'pcip': req.body.ip }
-          },
-          { upsert: false })
-          .then(results => {
-            res.redirect('/dashboard-admin');
-          })
-          .catch(error => console.error(error))
+        if (req.body.location == "0.0.0.0") {
+          devicesCollection.findOneAndUpdate(
+            { 'did': req.body.id },
+            {
+              '$set':
+                { 'did': req.body.id, 'name': req.body.name, 'location.name': null, 'location.ip': null, 'location.loc': null }
+            },
+            { upsert: false })
+            .then(results => {
+              res.redirect('/dashboard-admin');
+            })
+            .catch(error => console.error(error))
+        }
+        else {
+          usersCollection.findOne({ uip: req.body.location })
+            .then(results => {
+              if (results) {
+                var name = results.name;
+                var userLocation = results.location;
+                devicesCollection.findOneAndUpdate(
+                  { 'did': req.body.id },
+                  {
+                    '$set':
+                      { 'did': req.body.id, 'name': req.body.name, 'location.name': name, 'location.ip': req.body.location, 'location.loc': userLocation }
+                  },
+                  { upsert: false })
+                  .then(results => {
+                    res.redirect('/dashboard-admin');
+                  })
+                  .catch(error => console.error(error))
+              }
+            });
+          pcsCollection.findOne({ ip: req.body.location })
+            .then(results => {
+              if (results) {
+                var name = results.name;
+                devicesCollection.findOneAndUpdate(
+                  { 'did': req.body.id },
+                  {
+                    '$set':
+                      { 'did': req.body.id, 'name': req.body.name, 'location.name': name, 'location.ip': req.body.location, 'location.loc': null }
+                  },
+                  { upsert: false })
+                  .then(results => {
+                    res.redirect('/dashboard-admin');
+                  })
+                  .catch(error => console.error(error))
+              }
+            });
+        }
       }
       else
         res.redirect('/');
@@ -225,7 +264,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           { 'uid': req.body.uid },
           {
             '$setOnInsert':
-              { 'uid': req.body.uid, 'name': req.body.uname, 'uip': req.body.uIP, 'password': 'siso@123' }
+              { 'uid': req.body.uid, 'name': req.body.uname, 'uip': req.body.uIP, 'password': 'siso@123', 'location': req.body.location }
           },
           { upsert: true })
           .then(results => {
@@ -243,7 +282,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           { 'uid': req.body.uid },
           {
             '$set':
-              { 'uid': req.body.uid, 'name': req.body.uname, 'uip': req.body.uIP }
+              { 'uid': req.body.uid, 'name': req.body.uname, 'uip': req.body.uIP, 'location': req.body.location }
           },
           { upsert: false })
           .then(results => {
