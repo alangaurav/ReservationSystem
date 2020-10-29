@@ -37,7 +37,7 @@
                                 <tr class="table-head-row">
                                     <th class="table-head-element">ID</th>
                                     <th class="table-head-element">Name</th>
-                                    <th class="table-head-element">IP</th>
+                                    <th class="table-head-element">Connected To</th>
                                     <th class="table-head-element">Current User</th>
                                     <th class="table-head-element"></th>
                                 </tr>
@@ -72,6 +72,7 @@
                                 <th class="table-head-element">ID</th>
                                 <th class="table-head-element">Name</th>
                                 <th class="table-head-element">IP</th>
+                                <th class="table-head-element">Location</th>
                                 <th class="table-head-element"></th>
                             </tr>
                         </thead>
@@ -91,10 +92,6 @@
                     <div class="form-group">
                         <input type="text" name="deviceId" id="deviceId" class="form-input" required placeholder="ID">
                         <label for="deviceId" class="form-label">Device ID</label>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="devicePC" id="devicePC" class="form-input" required placeholder="PC">
-                        <label for="devicePC" class="form-label">Device PC</label>
                     </div>
                     <div class="form-button text-center">
                         <button type="submit" class="button">Add device</button>
@@ -130,6 +127,11 @@
                         <input type="text" name="uIP" id="uIP" class="form-input" required placeholder="IP">
                         <label for="uIP" class="form-label">IP</label>
                     </div>
+                    <div class="form-group">
+                        <input type="text" name="location" id="location" class="form-input" required
+                            placeholder="Location">
+                        <label for="location" class="form-label">Location</label>
+                    </div>
                     <div class="form-button text-center">
                         <button type="submit" class="button">Add User</button>
                     </div>
@@ -143,12 +145,33 @@
             belong soley to Alan Gaurav. Embrace feminism and equality or suffer the misdeed of mankind.</div>
     </footer>
 
-    <div class="popup" id="popup">
+    <div class="popup" id="popup-pc">
         <div class="popup__content">
             <a href="/" class="popup__close">&times;</a>
-            <form class="form" method="POST">
+            <form class="form" method="POST" action="/update-pc">
                 <h2 class="form-title form-title__small">Update Information</h2>
-                <div class="form-group inactive">
+                <div class="form-group">
+                    <input type="text" name="name" id="name" class="form-input form-input__name" required
+                        placeholder="Name">
+                    <label for="name" class="form-label">Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="ip" id="ip" class="form-input form-input__ip" required placeholder="IP">
+                    <label for="ip" class="form-label">IP</label>
+                </div>
+                <div class="form-button text-center">
+                    <button type="submit" class="button">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="popup" id="popup-device">
+        <div class="popup__content">
+            <a href="/" class="popup__close">&times;</a>
+            <form class="form" method="POST" action="/update-device">
+                <h2 class="form-title form-title__small">Update Information</h2>
+                <div class="form-group">
                     <input type="text" name="id" id="id" class="form-input form-input__id" placeholder="ID">
                     <label for="ip" class="form-label">ID</label>
                 </div>
@@ -158,8 +181,9 @@
                     <label for="name" class="form-label">Name</label>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="ip" id="ip" class="form-input form-input__ip" required placeholder="IP">
-                    <label for="ip" class="form-label">IP</label>
+                    <select name="location" id="location-list">
+                    </select>
+                    <label for="location" class="form-label">Connected To</label>
                 </div>
                 <div class="form-button text-center">
                     <button type="submit" class="button">Update</button>

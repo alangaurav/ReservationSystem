@@ -22,37 +22,73 @@ function renderDeviceTable() {
         success: function (data) {
             $('#table-device .table-body').html('');
             data.forEach(element => {
-                if (element.currentUser == user) {
-                    $('#table-device .table-body').append(
-                        '<tr class="table-body-row">' +
-                        '<td class="table-body-element">' + element.did + '</td>' +
-                        '<td class="table-body-element">' + element.name + '</td>' +
-                        '<td class="table-body-element">' + element.pcip + '</td>' +
-                        '<td class="table-body-element">' + element.currentUser + '</td>' +
-                        '<td class="table-body-element"> <button class="button button-delete" id="' + element.did + '">delete </button></td>' +
-                        '</tr>'
-                    )
-                }
-                else if (element.currentUser == null) {
-                    $('#table-device .table-body').append(
-                        '<tr class="table-body-row">' +
-                        '<td class="table-body-element">' + element.did + '</td>' +
-                        '<td class="table-body-element">' + element.name + '</td>' +
-                        '<td class="table-body-element">' + element.pcip + '</td>' +
-                        '<td class="table-body-element"></td>' +
-                        '<td class="table-body-element"> <button class="button button-reserve" id="' + element.did + '">reserve </button></td>' +
-                        '</tr>'
-                    )
+                if (element.location.name != null) {
+                    if (element.currentUser == user) {
+                        $('#table-device .table-body').append(
+                            '<tr class="table-body-row">' +
+                            '<td class="table-body-element">' + element.did + '</td>' +
+                            '<td class="table-body-element">' + element.name + '</td>' +
+                            '<td class="table-body-element">' + element.location.name + '</td>' +
+                            '<td class="table-body-element">' + element.currentUser + '</td>' +
+                            '<td class="table-body-element"> <button class="button button-delete" id="' + element.did + '">delete </button></td>' +
+                            '</tr>'
+                        )
+                    }
+                    else if (element.currentUser == null) {
+                        $('#table-device .table-body').append(
+                            '<tr class="table-body-row">' +
+                            '<td class="table-body-element">' + element.did + '</td>' +
+                            '<td class="table-body-element">' + element.name + '</td>' +
+                            '<td class="table-body-element">' + element.location.name + '</td>' +
+                            '<td class="table-body-element"></td>' +
+                            '<td class="table-body-element"> <button class="button button-reserve" id="' + element.did + '">reserve </button></td>' +
+                            '</tr>'
+                        )
+                    }
+                    else {
+                        $('#table-device .table-body').append(
+                            '<tr class="table-body-row">' +
+                            '<td class="table-body-element">' + element.did + '</td>' +
+                            '<td class="table-body-element">' + element.name + '</td>' +
+                            '<td class="table-body-element">' + element.location.name + '</td>' +
+                            '<td class="table-body-element">' + element.currentUser + '</td>' +
+                            '</tr>'
+                        )
+                    }
                 }
                 else {
-                    $('#table-device .table-body').append(
-                        '<tr class="table-body-row">' +
-                        '<td class="table-body-element">' + element.did + '</td>' +
-                        '<td class="table-body-element">' + element.name + '</td>' +
-                        '<td class="table-body-element">' + element.pcip + '</td>' +
-                        '<td class="table-body-element">' + element.currentUser + '</td>' +
-                        '</tr>'
-                    )
+                    if (element.currentUser == user) {
+                        $('#table-device .table-body').append(
+                            '<tr class="table-body-row">' +
+                            '<td class="table-body-element">' + element.did + '</td>' +
+                            '<td class="table-body-element">' + element.name + '</td>' +
+                            '<td class="table-body-element"></td>' +
+                            '<td class="table-body-element">' + element.currentUser + '</td>' +
+                            '<td class="table-body-element"> <button class="button button-delete" id="' + element.did + '">delete </button></td>' +
+                            '</tr>'
+                        )
+                    }
+                    else if (element.currentUser == null) {
+                        $('#table-device .table-body').append(
+                            '<tr class="table-body-row">' +
+                            '<td class="table-body-element">' + element.did + '</td>' +
+                            '<td class="table-body-element">' + element.name + '</td>' +
+                            '<td class="table-body-element"></td>' +
+                            '<td class="table-body-element"></td>' +
+                            '<td class="table-body-element"> <button class="button button-reserve" id="' + element.did + '">reserve </button></td>' +
+                            '</tr>'
+                        )
+                    }
+                    else {
+                        $('#table-device .table-body').append(
+                            '<tr class="table-body-row">' +
+                            '<td class="table-body-element">' + element.did + '</td>' +
+                            '<td class="table-body-element">' + element.name + '</td>' +
+                            '<td class="table-body-element"></td>' +
+                            '<td class="table-body-element">' + element.currentUser + '</td>' +
+                            '</tr>'
+                        )
+                    }
                 }
             })
         }
@@ -111,6 +147,7 @@ function renderUserInfo() {
             $('#uid').val(result.uid);
             $('#uname').val(result.name);
             $('#uIP').val(result.uip);
+            $('#location').val(result.location);
         }
     })
 }

@@ -25,24 +25,56 @@ function renderDeviceTable() {
         success: function (data) {
             $('.table-body__device').html('');
             data.forEach(element => {
-                if (element.currentUser == null) {
+                if (element.currentUser == null && element.location.name == null) {
                     $('.table-body__device').append(
                         '<tr class="table-body-row">' +
                         '<td class="table-body-element">' + element.did + '</td>' +
                         '<td class="table-body-element">' + element.name + '</td>' +
-                        '<td class="table-body-element">' + element.pcip + '</td>' +
                         '<td class="table-body-element"></td>' +
-                        '<td class="table-body-element"><button class="button button-delete" id="' + element.did + '">delete</button>&nbsp<a class="button button-update" id="' + element.did + '" href="#popup">update</a></td>' +
+                        '<td class="table-body-element"></td>' +
+                        '<td class="table-body-element"><button class="button button-delete" id="' + element.did + '">delete</button>&nbsp<a class="button button-update" id="' + element.did + '" href="#popup-device">update</a></td>' +
                         '</tr>'
                     )
                 }
-                else {
+                else if (element.currentUser != null && element.location.name != null && element.location.loc != null) {
                     $('.table-body__device').append(
                         '<tr class="table-body-row">' +
                         '<td class="table-body-element">' + element.did + '</td>' +
                         '<td class="table-body-element">' + element.name + '</td>' +
-                        '<td class="table-body-element">' + element.pcip + '</td>' +
+                        '<td class="table-body-element">' + element.location.name + '&nbsp (' + element.location.ip + '&nbsp' + element.location.loc + ')</td>' +
                         '<td class="table-body-element">' + element.currentUser + '</td>' +
+                        '</tr>'
+                    )
+                }
+                else if (element.currentUser != null && element.location.name != null && element.location.loc == null) {
+                    $('.table-body__device').append(
+                        '<tr class="table-body-row">' +
+                        '<td class="table-body-element">' + element.did + '</td>' +
+                        '<td class="table-body-element">' + element.name + '</td>' +
+                        '<td class="table-body-element">' + element.location.name + '&nbsp (' + element.location.ip + ')</td>' +
+                        '<td class="table-body-element">' + element.currentUser + '</td>' +
+                        '</tr>'
+                    )
+                }
+                else if (element.currentUser == null && element.location.name != null && element.location.loc != null) {
+                    $('.table-body__device').append(
+                        '<tr class="table-body-row">' +
+                        '<td class="table-body-element">' + element.did + '</td>' +
+                        '<td class="table-body-element">' + element.name + '</td>' +
+                        '<td class="table-body-element">' + element.location.name + '&nbsp (' + element.location.ip + '&nbsp' + element.location.loc + ')</td>' +
+                        '<td class="table-body-element"></td>' +
+                        '<td class="table-body-element"><button class="button button-delete" id="' + element.did + '">delete</button>&nbsp<a class="button button-update" id="' + element.did + '" href="#popup-device">update</a></td>' +
+                        '</tr>'
+                    )
+                }
+                else if (element.currentUser == null && element.location.name != null && element.location.loc == null) {
+                    $('.table-body__device').append(
+                        '<tr class="table-body-row">' +
+                        '<td class="table-body-element">' + element.did + '</td>' +
+                        '<td class="table-body-element">' + element.name + '</td>' +
+                        '<td class="table-body-element">' + element.location.name + '&nbsp (' + element.location.ip + ')</td>' +
+                        '<td class="table-body-element"></td>' +
+                        '<td class="table-body-element"><button class="button button-delete" id="' + element.did + '">delete</button>&nbsp<a class="button button-update" id="' + element.did + '" href="#popup-device">update</a></td>' +
                         '</tr>'
                     )
                 }
@@ -64,6 +96,7 @@ function renderUserTable() {
                     '<td class="table-body-element">' + element.uid + '</td>' +
                     '<td class="table-body-element">' + element.name + '</td>' +
                     '<td class="table-body-element">' + element.uip + '</td>' +
+                    '<td class="table-body-element">' + element.location + '</td>' +
                     '<td class="table-body-element"> <button class="button button-delete" id="' + element.uid + '">delete</button></td>' +
                     '</tr>'
                 )
@@ -86,7 +119,7 @@ function renderPCTable() {
                         '<td class="table-body-element">' + element.name + '</td>' +
                         '<td class="table-body-element">' + element.ip + '</td>' +
                         '<td class="table-body-element"></td>' +
-                        '<td class="table-body-element"><button class="button button-delete" id="' + element.ip + '">delete</button>&nbsp<a class="button button-update" id="' + element.ip + '" href="#popup">update</a></td>' +
+                        '<td class="table-body-element"><button class="button button-delete" id="' + element.ip + '">delete</button>&nbsp<a class="button button-update" id="' + element.ip + '" href="#popup-pc">update</a></td>' +
                         '</tr>'
                     )
                 }
@@ -102,6 +135,32 @@ function renderPCTable() {
             })
         }
     });
+}
+
+function renderDeviceSelect() {
+    $('#location-list').append('<option value="0.0.0.0" selected>None</option>');
+    $.ajax({
+        type: "GET",
+        url: '/pc-data',
+        dataType: "json",
+        success: function (data) {
+            data.forEach(element => {
+                $('#location-list').append('<option value="' + element.ip + '">' + element.name + '</option>');
+
+            })
+        }
+    })
+
+    $.ajax({
+        type: "GET",
+        url: '/user-data',
+        dataType: "json",
+        success: function (data) {
+            data.forEach(element => {
+                $('#location-list').append('<option value="' + element.uip + '">' + element.name + '</option>');
+            })
+        }
+    })
 }
 
 $('.sidenav-list').on('click', '.sidenav-list-item', function () {
@@ -189,14 +248,9 @@ $('.table-body__device').on('click', '.button-update', function () {
     var ip = row.children('td').eq(2).html();
     var id = $(this).attr('id');
 
-    $('.popup__content > .form').attr('action', '/update-device');
-
-    var idGroup = $('.form-group.inactive');
-    console.log(idGroup);
-    idGroup.removeClass('inactive');
+    renderDeviceSelect();
     $('.form-input__id').val(id);
     $('.form-input__name').val(name);
-    $('.form-input__ip').val(ip);
 })
 
 $('.table-body__pc').on('click', '.button-update', function () {
@@ -204,7 +258,6 @@ $('.table-body__pc').on('click', '.button-update', function () {
     var name = row.children('td').eq(0).html();
     var ip = $(this).attr('id');
 
-    $('.popup__content > .form').attr('action', '/update-pc');
     $('.form-input__name').val(name);
     $('.form-input__ip').val(ip);
 })
