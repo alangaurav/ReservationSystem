@@ -13,31 +13,3 @@ select option {
     background-color: transparent;
     font-size: 1.2rem;
 }
-
-.select {
-    padding: 1.5rem;
-    text-align: center;
-    margin: 2rem 0;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
-    &-title {
-        padding: 1rem 0;
-        font-weight: 500;
-        color: $color-primary;
-        font-size: 1.6rem;
-    }
-
-    &-label {
-        font-size: 1.4rem;
-        color: $color-text-dark;
-        padding: 1rem 0;
-    }
-
-    .button {
-        margin-top: 2.5rem;
-    }
-}
