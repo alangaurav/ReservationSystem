@@ -36,26 +36,6 @@ function renderDeviceTable() {
                         '</tr>'
                     )
                 }
-                else if (element.currentUser != null && element.location.name != null && element.location.loc != null) {
-                    $('.table-body__device').append(
-                        '<tr class="table-body-row">' +
-                        '<td class="table-body-element">' + element.did + '</td>' +
-                        '<td class="table-body-element">' + element.name + '</td>' +
-                        '<td class="table-body-element">' + element.location.name + '&nbsp (' + element.location.ip + '&nbsp' + element.location.loc + ')</td>' +
-                        '<td class="table-body-element">' + element.currentUser + '</td>' +
-                        '</tr>'
-                    )
-                }
-                else if (element.currentUser != null && element.location.name != null && element.location.loc == null) {
-                    $('.table-body__device').append(
-                        '<tr class="table-body-row">' +
-                        '<td class="table-body-element">' + element.did + '</td>' +
-                        '<td class="table-body-element">' + element.name + '</td>' +
-                        '<td class="table-body-element">' + element.location.name + '&nbsp (' + element.location.ip + ')</td>' +
-                        '<td class="table-body-element">' + element.currentUser + '</td>' +
-                        '</tr>'
-                    )
-                }
                 else if (element.currentUser == null && element.location.name != null && element.location.loc != null) {
                     $('.table-body__device').append(
                         '<tr class="table-body-row">' +
@@ -75,6 +55,39 @@ function renderDeviceTable() {
                         '<td class="table-body-element">' + element.location.name + '&nbsp (' + element.location.ip + ')</td>' +
                         '<td class="table-body-element"></td>' +
                         '<td class="table-body-element"><button class="button button-delete" id="' + element.did + '">delete</button>&nbsp<a class="button button-update" id="' + element.did + '" href="#popup-device">update</a></td>' +
+                        '</tr>'
+                    )
+                }
+                else if (element.currentUser != null && element.location.name == null) {
+                    $('.table-body__device').append(
+                        '<tr class="table-body-row">' +
+                        '<td class="table-body-element">' + element.did + '</td>' +
+                        '<td class="table-body-element">' + element.name + '</td>' +
+                        '<td class="table-body-element"></td>' +
+                        '<td class="table-body-element">' + element.currentUser + '</td>' +
+                        '<td class="table-body-element"><a class="button button-update" id="' + element.did + '" href="#popup-device-disabled">update</a></td>' +
+                        '</tr>'
+                    )
+                }
+                else if (element.currentUser != null && element.location.name != null && element.location.loc != null) {
+                    $('.table-body__device').append(
+                        '<tr class="table-body-row">' +
+                        '<td class="table-body-element">' + element.did + '</td>' +
+                        '<td class="table-body-element">' + element.name + '</td>' +
+                        '<td class="table-body-element">' + element.location.name + '&nbsp (' + element.location.ip + '&nbsp' + element.location.loc + ')</td>' +
+                        '<td class="table-body-element">' + element.currentUser + '</td>' +
+                        '<td class="table-body-element"><a class="button button-update" id="' + element.did + '" href="#popup-device-disabled">update</a></td>' +
+                        '</tr>'
+                    )
+                }
+                else if (element.currentUser != null && element.location.name != null && element.location.loc == null) {
+                    $('.table-body__device').append(
+                        '<tr class="table-body-row">' +
+                        '<td class="table-body-element">' + element.did + '</td>' +
+                        '<td class="table-body-element">' + element.name + '</td>' +
+                        '<td class="table-body-element">' + element.location.name + '&nbsp (' + element.location.ip + ')</td>' +
+                        '<td class="table-body-element">' + element.currentUser + '</td>' +
+                        '<td class="table-body-element"><a class="button button-update" id="' + element.did + '" href="#popup-device-disabled">update</a></td>' +
                         '</tr>'
                     )
                 }
@@ -138,14 +151,14 @@ function renderPCTable() {
 }
 
 function renderDeviceSelect() {
-    $('#location-list').append('<option value="0.0.0.0" selected>None</option>');
+    $('.locationList').append('<option value="0.0.0.0" selected>None</option>');
     $.ajax({
         type: "GET",
         url: '/pc-data',
         dataType: "json",
         success: function (data) {
             data.forEach(element => {
-                $('#location-list').append('<option value="' + element.ip + '">' + element.name + '</option>');
+                $('.locationList').append('<option value="' + element.ip + '">' + element.name + '</option>');
 
             })
         }
@@ -157,7 +170,7 @@ function renderDeviceSelect() {
         dataType: "json",
         success: function (data) {
             data.forEach(element => {
-                $('#location-list').append('<option value="' + element.uip + '">' + element.name + '</option>');
+                $('.locationList').append('<option value="' + element.uip + '">' + element.name + '</option>');
             })
         }
     })
