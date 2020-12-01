@@ -1,0 +1,14 @@
+{"_id":{"$oid":"5f84be55b811e83843b25f8a"},"did":"00000376ec943913","currentUser":"mudit.s2","inUse":true,"name":"Nacho1","location":{"name":"Khalid","ip":"107.122.8.173","loc":"07-01-157"}}
+{"_id":{"$oid":"5f84bf39b811e83843b2604d"},"did":"0000010daf143913","currentUser":"vkumar.1997","inUse":true,"name":"Nacho2","location":{"name":"Linux Test 1","ip":"107.110.207.208","loc":null}}
+{"_id":{"$oid":"5f84bf46b811e83843b26060"},"did":"0000018eae143913","currentUser":"srinivasard","inUse":true,"name":"Nacho3","location":{"name":"Sachin","ip":"107.122.3.49","loc":"07-01-166"}}
+{"_id":{"$oid":"5f84bf60b811e83843b2608b"},"did":"0000030ef7143913","currentUser":"mudit.s2","inUse":true,"name":"Nacho4","location":{"name":"Linux Test 1","ip":"107.110.207.208","loc":null}}
+{"_id":{"$oid":"5f934e59b811e83843b89e0a"},"did":"000007b7758e1513","currentUser":"a.jharbade","inUse":true,"name":"Lassen FHD+3","location":{"name":"Linux Test 2","ip":"107.108.221.122","loc":null}}
+{"_id":{"$oid":"5f934e7cb811e83843b89e28"},"did":"0000058c4c8e1513","currentUser":"vkumar.1997","inUse":true,"name":"Lassen FHD+4","location":{"name":"Vipin","ip":"107.122.8.143","loc":"07-01-145"}}
+{"_id":{"$oid":"5f934e96b811e83843b89e4e"},"did":"000005d62c8e1513","currentUser":"divya.v","inUse":true,"name":"Lassen FHD+2","location":{"name":"Linux Test 2","ip":"107.108.221.122","loc":null}}
+{"_id":{"$oid":"5f934eb1b811e83843b89e73"},"did":"000004d54f87e513","currentUser":"sky.tiwari","inUse":true,"name":"Lassen FHD+1","location":{"name":"Linux Test 2","ip":"107.108.221.122","loc":null}}
+{"_id":{"$oid":"5f934eceb811e83843b89e8b"},"did":"000006d52f18a513","currentUser":null,"inUse":false,"name":"Lassen FHD2","location":{"name":"Linux Test 3","ip":"107.110.206.119","loc":null}}
+{"_id":{"$oid":"5f934ee9b811e83843b89ea7"},"did":"0000048d4f18a513","currentUser":"sky.tiwari","inUse":true,"name":"Lassen FHD1","location":{"name":"Linux Test 3","ip":"107.110.206.119","loc":null}}
+{"_id":{"$oid":"5f934f33b811e83843b89ef5"},"did":"000002571ccee853","currentUser":null,"inUse":false,"name":"Java","location":{"name":null,"ip":null,"loc":null}}
+{"_id":{"$oid":"5f934f46b811e83843b89f11"},"did":"000002971ccee853","currentUser":null,"inUse":false,"name":"Java","location":{"name":null,"ip":null,"loc":null}}
+{"_id":{"$oid":"5f934f90b811e83843b89f53"},"did":"000003750c394793","currentUser":null,"inUse":false,"name":"Joshua","location":{"name":null,"ip":null,"loc":null}}
+{"_id":{"$oid":"5fab68cfb811e83843c2c76c"},"did":"000000f62c943913","currentUser":null,"inUse":false,"location":{"ip":"107.110.207.208","loc":null,"name":"Linux Test 1"},"name":"Nacho5"}

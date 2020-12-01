@@ -1,0 +1,9 @@
+{"_id":{"$oid":"5f84c1a1b811e83843b26317"},"ip":"107.110.207.209","name":"Windows Test 3","currentUser":null,"inUse":false}
+{"_id":{"$oid":"5f84c1d5b811e83843b2635e"},"ip":"107.108.73.64","name":"Windows Test 1","currentUser":null,"inUse":false}
+{"_id":{"$oid":"5f84c1deb811e83843b26371"},"ip":"107.108.73.52","name":"Windows Test 2"}
+{"_id":{"$oid":"5f935018b811e83843b89fb6"},"ip":"107.108.207.131","name":"Linux Security","currentUser":null,"inUse":false}
+{"_id":{"$oid":"5f935039b811e83843b89fd7"},"ip":"107.108.207.108","name":"Linux Jenkins","currentUser":null,"inUse":false}
+{"_id":{"$oid":"5f93505db811e83843b8a005"},"ip":"107.110.207.208","name":"Linux Test 1"}
+{"_id":{"$oid":"5f935075b811e83843b8a023"},"ip":"107.108.221.122","name":"Linux Test 2","currentUser":null,"inUse":false}
+{"_id":{"$oid":"5f93508eb811e83843b8a039"},"ip":"107.110.206.119","name":"Linux Test 3","currentUser":null,"inUse":false}
+{"_id":{"$oid":"5fabb0aab811e83843c2e9a0"},"ip":"1.1.6.5","name":"Charger"}
